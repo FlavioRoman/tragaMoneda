@@ -1,25 +1,13 @@
 import { useEffect, useState } from "react";
+import Confetti from "react-confetti";
+import { items } from "./utils/items";
+import { GiLever } from "react-icons/gi";
+import { BiReset } from "react-icons/bi";
 
 function App() {
-  const items = [
-    "🍭",
-    "❌",
-    "⛄️",
-    "🦄",
-    "🍌",
-    "💩",
-    "👻",
-    "😻",
-    "💵",
-    "🤡",
-    "🦖",
-    "🍎",
-    "😂",
-    "🖕",
-  ];
-
+  const [list, setList] = useState([]);
   const [doors, setDoors] = useState([]);
-  const [result, setResult] = useState([]);
+  const [winner, setWinner] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
 
   useEffect(() => {
@@ -102,12 +90,18 @@ function App() {
 
     setIsSpinning(false);
 
-    doors.map((item, index) => {
+    doors.map((item) => {
       const element = item
         .querySelector(".boxes")
         .querySelector(".box").innerHTML;
-      setResult((prevState) => [...prevState, element]);
+      setList((prevState) => [...prevState, element]);
     });
+
+    const result = list.every((item) => {
+      return list[0] == item;
+    });
+
+    setWinner(result);
   }
 
   function shuffle([...arr]) {
@@ -119,32 +113,34 @@ function App() {
     return arr;
   }
 
-  // console.log(isSpinning);
-
   return (
     <div id="app">
-      <div className="doors">
-        <div className="door">
-          <div className="boxes"></div>
+      <h1>TRAGA MONEDA</h1>
+      <section>
+        {winner ? <Confetti /> : ""}
+        <div className="doors">
+          <div className="door">
+            <div className="boxes"></div>
+          </div>
+
+          <div className="door">
+            <div className="boxes"></div>
+          </div>
+
+          <div className="door">
+            <div className="boxes"></div>
+          </div>
         </div>
 
-        <div className="door">
-          <div className="boxes"></div>
+        <div className="buttons">
+          <button id="spinner" onClick={spin} disabled={isSpinning}>
+            <GiLever size={30} color="#fff" />
+          </button>
+          <button id="reseter" onClick={() => init()} disabled={isSpinning}>
+            <BiReset size={30} color="#fff" />
+          </button>
         </div>
-
-        <div className="door">
-          <div className="boxes"></div>
-        </div>
-      </div>
-
-      <div className="buttons">
-        <button id="spinner" onClick={spin} disabled={isSpinning}>
-          JUGAR
-        </button>
-        <button id="reseter" onClick={() => init()} disabled={isSpinning}>
-          REINICIAR
-        </button>
-      </div>
+      </section>
     </div>
   );
 }

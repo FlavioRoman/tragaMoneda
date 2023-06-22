@@ -14,6 +14,15 @@ body {
   background: #252525;
 }
 
+h1 {
+  color: #fafafa;
+  text-align: center;
+}
+
+section {
+  padding: 20px;
+}
+
 button {
   cursor: pointer;
   font-size: 1.2rem;
@@ -22,14 +31,18 @@ button {
   padding: 10px 15px;
   font-weight: 600;
   color: #fafafa;
-  border-radius: 10px;
   background-color: tomato;
-  transition: 0.3s;
+  border-left: 5px solid rgb(255, 138, 117);
+  border-right: 5px solid rgb(254, 134, 113);
+  border-bottom: 10px solid rgb(254, 134, 113);
+  transition: 0.5s;
 }
 
-button:hover {
+button:focus {
   color: tomato;
-  background-color: #fafafa;
+  border-left: 0px solid rgb(255, 138, 117);
+  border-bottom: 0px solid rgb(254, 134, 113);
+  border-right: 0px solid rgb(254, 134, 113);
 }
 
 .doors {
