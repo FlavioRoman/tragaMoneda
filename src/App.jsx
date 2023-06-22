@@ -111,7 +111,7 @@ function App() {
   return (
     <div id="app">
       <h1>TRAGA MONEDA</h1>
-      <section>
+      <motion.section variants={container} initial="hidden" animate="visible">
         {/* {winner ? <Confetti /> : ""} */}
         <div className="doors">
           <div className="door">
@@ -128,14 +128,24 @@ function App() {
         </div>
 
         <div className="buttons">
-          <button id="spinner" onClick={spin} disabled={isSpinning}>
+          <motion.button
+            id="spinner"
+            onClick={spin}
+            disabled={isSpinning}
+            variants={element}
+          >
             <GiLever size={30} color="#fff" />
-          </button>
-          <button id="reseter" onClick={() => init()} disabled={isSpinning}>
+          </motion.button>
+          <motion.button
+            id="reseter"
+            onClick={() => init()}
+            disabled={isSpinning}
+            variants={element}
+          >
             <BiReset size={30} color="#fff" />
-          </button>
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
