@@ -75,6 +75,7 @@ function App() {
     });
 
     setDoors(updatedDoors);
+    setIsSpinning(false);
   }
 
   async function spin() {
@@ -88,20 +89,12 @@ function App() {
       await new Promise((resolve) => setTimeout(resolve, duration * 100));
     }
 
-    setIsSpinning(false);
-
     doors.map((item) => {
       const element = item
         .querySelector(".boxes")
         .querySelector(".box").innerHTML;
       setList((prevState) => [...prevState, element]);
     });
-
-    const result = list.every((item) => {
-      return list[0] == item;
-    });
-
-    setWinner(result);
   }
 
   function shuffle([...arr]) {
@@ -117,7 +110,7 @@ function App() {
     <div id="app">
       <h1>TRAGA MONEDA</h1>
       <section>
-        {winner ? <Confetti /> : ""}
+        {/* {winner ? <Confetti /> : ""} */}
         <div className="doors">
           <div className="door">
             <div className="boxes"></div>
