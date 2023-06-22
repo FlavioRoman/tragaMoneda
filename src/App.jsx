@@ -4,6 +4,7 @@ import { GiLever } from "react-icons/gi";
 import { BiReset } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { container, element } from "./utils/animation";
+import { items } from "./utils/items";
 
 function App() {
   const [list, setList] = useState([]);
@@ -110,43 +111,31 @@ function App() {
   return (
     <div id="app">
       <h1>TRAGA MONEDA</h1>
-      <motion.section variants={container} initial="hidden" animate="visible">
+      <section>
         {/* {winner ? <Confetti /> : ""} */}
         <div className="doors">
-          <motion.div className="door" variants={element}>
+          <div className="door">
             <div className="boxes"></div>
-          </motion.div>
+          </div>
 
-          <motion.div className="door" variants={element}>
+          <div className="door">
             <div className="boxes"></div>
-          </motion.div>
+          </div>
 
-          <motion.div className="door" variants={element}>
+          <div className="door">
             <div className="boxes"></div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="buttons">
-          <motion.button
-            variants={element}
-            className="item"
-            id="spinner"
-            onClick={spin}
-            disabled={isSpinning}
-          >
+          <button id="spinner" onClick={spin} disabled={isSpinning}>
             <GiLever size={30} color="#fff" />
-          </motion.button>
-          <motion.button
-            variants={element}
-            className="item"
-            id="reseter"
-            onClick={() => init()}
-            disabled={isSpinning}
-          >
+          </button>
+          <button id="reseter" onClick={() => init()} disabled={isSpinning}>
             <BiReset size={30} color="#fff" />
-          </motion.button>
+          </button>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }
