@@ -5,18 +5,18 @@ import { BiReset } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { container, element } from "./utils/animation";
 import { items } from "./utils/items";
+import { disabled, enabled } from "./utils/styles";
 
 function App() {
-  const [list, setList] = useState([]);
   const [doors, setDoors] = useState([]);
-  const [winner, setWinner] = useState(false);
+  const [state, setState] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
 
   useEffect(() => {
     init();
   }, []);
 
-  function init(firstInit = true, groups = 1, duration = 1) {
+  function init(firstInit = true, enabled = false, groups = 1, duration = 1) {
     const doorElements = Array.from(document.querySelectorAll(".door"));
     const updatedDoors = doorElements.map((door) => {
       if (firstInit) {
@@ -78,11 +78,12 @@ function App() {
 
     setDoors(updatedDoors);
     setIsSpinning(false);
+    setState(enabled);
   }
 
   async function spin() {
     setIsSpinning(true);
-    init(false, 1, 2);
+    init(false, true, 1, 2);
 
     for (const door of doors) {
       const boxes = door.querySelector(".boxes");
@@ -90,13 +91,6 @@ function App() {
       boxes.style.transform = "translateY(0)";
       await new Promise((resolve) => setTimeout(resolve, duration * 100));
     }
-
-    doors.map((item) => {
-      const element = item
-        .querySelector(".boxes")
-        .querySelector(".box").innerHTML;
-      setList((prevState) => [...prevState, element]);
-    });
   }
 
   function shuffle([...arr]) {
@@ -130,9 +124,10 @@ function App() {
         <div className="buttons">
           <motion.button
             id="spinner"
-            onClick={spin}
-            disabled={isSpinning}
+            onClick={() => spin()}
+            disabled={state}
             variants={element}
+            style={state ? enabled : disabled}
           >
             <GiLever size={30} color="#fff" />
           </motion.button>
