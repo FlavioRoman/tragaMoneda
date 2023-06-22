@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
-import { items } from "./utils/items";
 import { GiLever } from "react-icons/gi";
 import { BiReset } from "react-icons/bi";
+import { motion } from "framer-motion";
+import { container, element } from "./utils/animation";
 
 function App() {
   const [list, setList] = useState([]);
@@ -109,7 +110,7 @@ function App() {
   return (
     <div id="app">
       <h1>TRAGA MONEDA</h1>
-      <section>
+      <motion.section variants={container} initial="hidden" animate="visible">
         {/* {winner ? <Confetti /> : ""} */}
         <div className="doors">
           <div className="door">
@@ -126,14 +127,24 @@ function App() {
         </div>
 
         <div className="buttons">
-          <button id="spinner" onClick={spin} disabled={isSpinning}>
+          <motion.button
+            variants={element}
+            id="spinner"
+            onClick={spin}
+            disabled={isSpinning}
+          >
             <GiLever size={30} color="#fff" />
-          </button>
-          <button id="reseter" onClick={() => init()} disabled={isSpinning}>
+          </motion.button>
+          <motion.button
+            variants={element}
+            id="reseter"
+            onClick={() => init()}
+            disabled={isSpinning}
+          >
             <BiReset size={30} color="#fff" />
-          </button>
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
