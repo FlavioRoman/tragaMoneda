@@ -113,22 +113,23 @@ function App() {
       <motion.section variants={container} initial="hidden" animate="visible">
         {/* {winner ? <Confetti /> : ""} */}
         <div className="doors">
-          <div className="door">
+          <motion.div className="door" variants={element}>
             <div className="boxes"></div>
-          </div>
+          </motion.div>
 
-          <div className="door">
+          <motion.div className="door" variants={element}>
             <div className="boxes"></div>
-          </div>
+          </motion.div>
 
-          <div className="door">
+          <motion.div className="door" variants={element}>
             <div className="boxes"></div>
-          </div>
+          </motion.div>
         </div>
 
         <div className="buttons">
           <motion.button
             variants={element}
+            className="item"
             id="spinner"
             onClick={spin}
             disabled={isSpinning}
@@ -137,6 +138,7 @@ function App() {
           </motion.button>
           <motion.button
             variants={element}
+            className="item"
             id="reseter"
             onClick={() => init()}
             disabled={isSpinning}
